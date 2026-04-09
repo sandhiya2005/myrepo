@@ -1,0 +1,69 @@
+factorial-app/
+│── pom.xml
+└── src/
+    ├── main/
+    │   └── java/
+    │       └── com/example/Factorial.java
+    └── test/
+        └── java/
+            └── com/example/FactorialTest.java
+
+
+Factorial.java
+
+package com.example;
+
+public class Factorial {
+
+    public static long calculate(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative numbers not allowed");
+        }
+
+        long result = 1;
+        for (int i = 1; i <= n; i++) {
+            result *= i;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int num = 5;
+        System.out.println("Factorial of " + num + " is: " + calculate(num));
+    }
+}
+
+FactorialTest.java
+
+package com.example;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class FactorialTest {
+
+    @Test
+    public void testFactorialOfZero() {
+        assertEquals(1, Factorial.calculate(0));
+    }
+
+    @Test
+    public void testFactorialOfFive() {
+        assertEquals(120, Factorial.calculate(5));
+    }
+
+    @Test
+    public void testFactorialOfOne() {
+        assertEquals(1, Factorial.calculate(1));
+    }
+
+    @Test
+    public void testNegativeNumber() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Factorial.calculate(-1);
+        });
+    }
+}
+
+pom.xml
+
